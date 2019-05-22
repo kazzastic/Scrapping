@@ -20,7 +20,8 @@ page_soup = soup(page_html, "html.parser")
 containers = page_soup.findAll("div", {"class":"item-container"})
 
 for container in containers:
-    #brand = container.div.div.a.img["title"]
+    brand = container.findAll("div", {"class":"item-info"})
+    brand_title = brand[0].div.a.img["title"]
     
     title_container = container.findAll("a", {"class":"item-title"})
     product_name = title_container[0].text
@@ -28,8 +29,9 @@ for container in containers:
     shipping_container = container.findAll("li", {"class":"price-ship"})
     shipping = shipping_container[0].text.strip()
     
-    #print("brand : " +brand)
+    
     print("--|---------------------------|--")
+    print("brand : " +brand_title)
     print("product name : "+product_name)
     print("shipping : "+shipping)
     print("--|---------------------------|--")
