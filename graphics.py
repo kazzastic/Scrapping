@@ -17,6 +17,14 @@ uClient.close()
 
 page_soup = soup(page_html, "html.parser")
 
+filename = "card.csv"
+f = open(filename, "w")
+
+headers = "brand, product_name, shipping\n"
+f.write(headers)
+
+
+
 containers = page_soup.findAll("div", {"class":"item-container"})
 
 for container in containers:
@@ -37,3 +45,6 @@ for container in containers:
     print("--|---------------------------|--")
     print("\n")
     
+    
+    f.write(brand_title+","+product_name.replace(",", "||")+","+shipping+"\n")
+f.close()
